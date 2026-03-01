@@ -7,156 +7,188 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --primary: #8b5cf6;
-  --dark: #0a0a0f;
+:root{
+  --primary:#8b5cf6;
+  --secondary:#00ffd5;
+  --bg:#07070c;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-  scroll-behavior: smooth;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+  scroll-behavior:smooth;
 }
 
-body {
-  background: var(--dark);
-  color: white;
-  overflow-x: hidden;
+body{
+  background:var(--bg);
+  color:white;
+  overflow-x:hidden;
 }
 
 /* Animated Background */
-body::before {
-  content: "";
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 30%, rgba(139,92,246,0.15), transparent 50%),
-              radial-gradient(circle at 70% 70%, rgba(0,255,200,0.08), transparent 50%);
-  animation: moveBg 20s linear infinite;
-  z-index: -1;
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(139,92,246,0.25), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(0,255,213,0.15), transparent 40%);
+  animation:move 18s infinite alternate ease-in-out;
+  z-index:-1;
 }
 
-@keyframes moveBg {
-  0% { transform: translate(0,0); }
-  50% { transform: translate(-10%, -10%); }
-  100% { transform: translate(0,0); }
+@keyframes move{
+  from{transform:translate(0,0);}
+  to{transform:translate(-8%,-6%);}
 }
 
 /* NAV */
-nav {
-  position: fixed;
-  width: 100%;
-  padding: 20px 8%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(10,10,15,0.6);
-  backdrop-filter: blur(12px);
-  z-index: 1000;
+nav{
+  position:fixed;
+  width:100%;
+  padding:20px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(12px);
+  z-index:1000;
 }
 
-nav h2 {
-  font-weight: 900;
-  letter-spacing: 3px;
-  color: var(--primary);
+nav h2{
+  color:var(--primary);
+  font-weight:900;
+  letter-spacing:3px;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 30px;
-  font-size: 14px;
-  transition: 0.3s;
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:14px;
+  transition:0.3s;
 }
 
-nav a:hover {
-  color: var(--primary);
+nav a:hover{
+  color:var(--secondary);
 }
 
 /* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 20px;
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
 }
 
-.hero h1 {
-  font-size: 90px;
-  font-weight: 900;
-  letter-spacing: 5px;
-  background: linear-gradient(90deg, #8b5cf6, #00ffd5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.hero h1{
+  font-size:85px;
+  font-weight:900;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:float 4s ease-in-out infinite;
 }
 
-.hero p {
-  margin-top: 20px;
-  opacity: 0.7;
+.hero p{
+  margin-top:20px;
+  opacity:0.7;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+  100%{transform:translateY(0);}
+}
+
+/* BUTTONS */
+.buttons{
+  margin-top:35px;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 28px;
+  margin:10px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:white;
+  box-shadow:0 0 20px rgba(139,92,246,0.6);
+}
+
+.btn-primary:hover{
+  box-shadow:0 0 35px rgba(139,92,246,1);
+  transform:translateY(-3px);
+}
+
+.btn-outline{
+  border:1px solid var(--secondary);
+  color:var(--secondary);
+}
+
+.btn-outline:hover{
+  background:var(--secondary);
+  color:black;
+  box-shadow:0 0 25px rgba(0,255,213,0.8);
 }
 
 /* SECTIONS */
-.section {
-  padding: 140px 8%;
-  text-align: center;
+.section{
+  padding:140px 8%;
+  text-align:center;
 }
 
-.section h2 {
-  font-size: 42px;
-  margin-bottom: 60px;
-  font-weight: 900;
-  color: var(--primary);
+.section h2{
+  font-size:42px;
+  margin-bottom:60px;
+  color:var(--primary);
+  font-weight:900;
 }
 
 /* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
 }
 
-.card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 40px;
-  border-radius: 14px;
-  transition: 0.4s;
+.card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:40px;
+  border-radius:14px;
+  transition:0.4s;
 }
 
-.card:hover {
-  transform: translateY(-12px);
-  border-color: var(--primary);
-  box-shadow: 0 0 30px rgba(139,92,246,0.4);
+.card:hover{
+  transform:translateY(-12px);
+  box-shadow:0 0 30px rgba(139,92,246,0.5);
 }
 
 /* FOOTER */
-footer {
-  padding: 60px 8%;
-  text-align: center;
-  opacity: 0.6;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-/* ANIMATION */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 1s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
+footer{
+  padding:60px 8%;
+  text-align:center;
+  opacity:0.6;
+  border-top:1px solid rgba(255,255,255,0.05);
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .hero h1 { font-size: 45px; }
-  nav a { margin-left: 15px; font-size: 12px; }
+  .hero h1{font-size:45px;}
 }
 </style>
 </head>
@@ -168,8 +200,7 @@ footer {
   <div>
     <a href="#team">TEAM</a>
     <a href="#matches">MATCHES</a>
-    <a href="#media">MEDIA</a>
-    <a href="#shop">SHOP</a>
+    <a href="#join">JOIN</a>
   </div>
 </nav>
 
@@ -177,10 +208,17 @@ footer {
   <div>
     <h1>NOVA SYNDICATE</h1>
     <p>Redefining Competitive Gaming.</p>
+
+    <div class="buttons">
+      <a href="#join" class="btn btn-primary">JOIN US</a>
+      <a href="https://discord.gg/wfhMkwE7Y3" target="_blank" class="btn btn-outline">
+        JOIN DISCORD
+      </a>
+    </div>
   </div>
 </section>
 
-<section id="team" class="section fade">
+<section id="team" class="section">
   <h2>ROSTER</h2>
   <div class="grid">
     <div class="card">NovaX<br><small>Captain</small></div>
@@ -189,47 +227,28 @@ footer {
   </div>
 </section>
 
-<section id="matches" class="section fade">
+<section id="matches" class="section">
   <h2>NEXT MATCH</h2>
   <div class="card">
     NOVA vs APEX UNIT<br>
-    March 15 • 9PM EST
+    Coming Soon
   </div>
 </section>
 
-<section id="media" class="section fade">
-  <h2>MEDIA</h2>
-  <div class="grid">
-    <div class="card">Highlights</div>
-    <div class="card">Tournament Recap</div>
-    <div class="card">Behind The Scenes</div>
-  </div>
-</section>
+<section id="join" class="section">
+  <h2>JOIN THE SYNDICATE</h2>
+  <p>Become part of the future of esports.</p>
 
-<section id="shop" class="section fade">
-  <h2>MERCH</h2>
-  <div class="grid">
-    <div class="card">Nova Jersey</div>
-    <div class="card">Syndicate Hoodie</div>
-    <div class="card">Limited Cap</div>
+  <div class="buttons">
+    <a href="mailto:novasyndicafeofficial@outlook.com" class="btn btn-primary">
+      CONTACT US
+    </a>
   </div>
 </section>
 
 <footer>
-  © 2026 Nova Syndicate — All Rights Reserved
+  © 2026 Nova Syndicate • All Rights Reserved
 </footer>
-
-<script>
-const faders = document.querySelectorAll('.fade');
-
-window.addEventListener('scroll', () => {
-  faders.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-      el.classList.add('show');
-    }
-  });
-});
-</script>
 
 </body>
 </html>
