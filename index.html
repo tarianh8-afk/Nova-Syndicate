@@ -1,242 +1,320 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA SYNDICATE</title>
+<title>Nova Syndicate Status</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Orbitron', sans-serif;
-  scroll-behavior: smooth;
+:root{
+  --bg:#0f172a;
+  --card:#111827;
+  --border:#1f2937;
+  --text:#f3f4f6;
+  --muted:#9ca3af;
+
+  --green:#22c55e;
+  --yellow:#facc15;
+  --red:#ef4444;
+  --blue:#3b82f6;
 }
 
-body {
-  background: radial-gradient(circle at top, #0d0d1a, #000);
-  color: white;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#0f172a 0%,#0b1220 100%);
+  color:var(--text);
 }
 
-/* NAVBAR */
-nav {
-  position: fixed;
-  width: 100%;
-  padding: 20px 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
+/* Layout */
+.wrapper{
+  max-width:900px;
+  margin:auto;
+  padding:24px 16px 60px;
 }
 
-nav h2 {
-  font-weight: 900;
-  letter-spacing: 3px;
-  color: #8a2be2;
+/* Header */
+.header{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:30px;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 30px;
-  font-size: 14px;
-  letter-spacing: 2px;
-  transition: 0.3s;
+.header-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
-nav a:hover {
-  color: #8a2be2;
+/* Status dot */
+.status-dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 10px var(--green);
+  position:relative;
 }
 
-/* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: linear-gradient(180deg, #000, #0d0d1a);
+.status-dot::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:2px solid var(--green);
+  animation:ripple 2.5s infinite;
 }
 
-.hero h1 {
-  font-size: 85px;
-  font-weight: 900;
-  letter-spacing: 6px;
-  text-shadow: 0 0 20px #8a2be2;
+@keyframes ripple{
+  0%{transform:scale(1);opacity:.6}
+  100%{transform:scale(2.2);opacity:0}
 }
 
-.hero p {
-  margin-top: 20px;
-  font-size: 18px;
-  opacity: 0.8;
+h1{
+  font-size:20px;
+  margin:0;
+  font-weight:700;
 }
 
-/* SECTIONS */
-.section {
-  padding: 120px 10%;
-  text-align: center;
+.subtitle{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:4px;
 }
 
-.section h2 {
-  font-size: 40px;
-  margin-bottom: 50px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  color: #8a2be2;
+/* Timer */
+.timer{
+  margin-top:12px;
+  font-size:14px;
+  font-weight:600;
+  background:linear-gradient(
+    120deg,
+    #3b82f6 0%,
+    #22c55e 40%,
+    #ffffff 50%,
+    #22c55e 60%,
+    #3b82f6 100%
+  );
+  background-size:400% auto;
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  animation:shine 12s ease-in-out infinite;
 }
 
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+@keyframes shine{
+  0%{background-position:-200% center}
+  40%{background-position:200% center}
+  100%{background-position:200% center}
 }
 
-.card {
-  background: #111;
-  padding: 40px;
-  border-radius: 12px;
-  transition: 0.3s;
-  border: 1px solid #222;
+/* Card */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:20px;
 }
 
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 25px #8a2be2;
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+  gap:10px;
 }
 
-/* MATCH BOX */
-.match-box {
-  background: #111;
-  padding: 50px;
-  border-radius: 12px;
-  border: 1px solid #222;
+.service-name{
+  font-weight:600;
+  font-size:16px;
 }
 
-/* FOOTER */
-footer {
-  background: #000;
-  padding: 60px 10%;
-  text-align: center;
-  opacity: 0.6;
+/* Badge */
+.badge{
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  border:1px solid;
 }
 
-/* FADE ANIMATION */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 1s ease;
+.badge.active{
+  color:var(--green);
+  border-color:var(--green);
 }
 
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
+.badge.maintenance{
+  color:var(--yellow);
+  border-color:var(--yellow);
 }
 
-/* MOBILE */
-@media(max-width: 768px){
-  nav {
-    padding: 20px;
-  }
+.badge.offline{
+  color:var(--red);
+  border-color:var(--red);
+}
 
-  nav a {
-    margin-left: 15px;
-    font-size: 12px;
-  }
+.badge.beta{
+  color:var(--blue);
+  border-color:var(--blue);
+}
 
-  .hero h1 {
-    font-size: 45px;
-  }
+/* Progress */
+.progress{
+  height:14px;
+  background:#1e293b;
+  border-radius:999px;
+  overflow:hidden;
+}
 
-  .section {
-    padding: 100px 5%;
-  }
+.progress-bar{
+  height:100%;
+  width:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,#3b82f6,#22c55e);
+  position:relative;
+  transition:width 1.2s ease;
+  overflow:hidden;
+}
+
+.progress-bar::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:30%;
+  height:100%;
+  background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.5) 50%,transparent 100%);
+  animation:barShine 4s ease-in-out infinite;
+}
+
+@keyframes barShine{
+  0%{left:-120%}
+  100%{left:120%}
+}
+
+.percent{
+  margin-top:6px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:40px;
+}
+
+/* Mobile adjustments */
+@media(max-width:480px){
+  h1{font-size:18px}
+  .service-name{font-size:15px}
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <h2>NOVA</h2>
-  <div>
-    <a href="#team">TEAM</a>
-    <a href="#matches">MATCHES</a>
-    <a href="#media">MEDIA</a>
-    <a href="#shop">SHOP</a>
-  </div>
-</nav>
+<div class="wrapper">
 
-<div class="hero">
-  <div>
-    <h1>NOVA SYNDICATE</h1>
-    <p>Dominate the Meta. Control the Future.</p>
+<div class="header">
+  <div class="header-top">
+    <div class="status-dot"></div>
+    <h1>Nova Syndicate</h1>
   </div>
+  <div class="subtitle">All systems operational</div>
+  <div class="timer" id="timer">Established: 0d 0h 0m 0s</div>
 </div>
 
-<div id="team" class="section fade">
-  <h2>OUR ROSTER</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>NovaX</h3>
-      <p>Captain</p>
-    </div>
-    <div class="card">
-      <h3>Phantom</h3>
-      <p>Sniper</p>
-    </div>
-    <div class="card">
-      <h3>Vortex</h3>
-      <p>Entry</p>
-    </div>
-  </div>
+<div id="services"></div>
+
+<div class="footer">
+Nova Syndicate © 2026
 </div>
 
-<div id="matches" class="section fade">
-  <h2>NEXT MATCH</h2>
-  <div class="match-box">
-    <h3>NOVA vs APEX UNIT</h3>
-    <p>March 15 • 9PM EST</p>
-  </div>
 </div>
-
-<div id="media" class="section fade">
-  <h2>MEDIA</h2>
-  <div class="grid">
-    <div class="card">Highlight Reel</div>
-    <div class="card">Tournament Recap</div>
-    <div class="card">Behind The Scenes</div>
-  </div>
-</div>
-
-<div id="shop" class="section fade">
-  <h2>MERCH</h2>
-  <div class="grid">
-    <div class="card">Nova Jersey</div>
-    <div class="card">Syndicate Hoodie</div>
-    <div class="card">Nova Cap</div>
-  </div>
-</div>
-
-<footer>
-  © 2026 NOVA SYNDICATE • All Rights Reserved
-</footer>
 
 <script>
-const faders = document.querySelectorAll('.fade');
 
-window.addEventListener('scroll', () => {
-  faders.forEach(fade => {
-    const top = fade.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      fade.classList.add('show');
-    }
+/* ===== EDIT SERVICES HERE ===== */
+const services=[
+  {name:"Core Infrastructure",percent:100,status:"active",label:"Operational"},
+  {name:"API Services",percent:82,status:"active",label:"Operational"},
+  {name:"User Platform",percent:65,status:"maintenance",label:"Maintenance"},
+  {name:"Analytics Engine",percent:30,status:"beta",label:"Beta"}
+];
+/* =============================== */
+
+function renderServices(){
+  const container=document.getElementById("services");
+
+  services.forEach(service=>{
+    const card=document.createElement("div");
+    card.className="card";
+
+    card.innerHTML=`
+      <div class="card-top">
+        <div class="service-name">${service.name}</div>
+        <div class="badge ${service.status}">
+          ${service.label}
+        </div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+      <div class="percent">0%</div>
+    `;
+
+    container.appendChild(card);
+
+    const bar=card.querySelector(".progress-bar");
+    const percentText=card.querySelector(".percent");
+
+    setTimeout(()=>{bar.style.width=service.percent+"%";},200);
+
+    let count=0;
+    const interval=setInterval(()=>{
+      if(count>=service.percent){clearInterval(interval);}
+      else{
+        count++;
+        percentText.textContent=count+"%";
+      }
+    },15);
   });
-});
+}
+
+renderServices();
+
+/* TIMER */
+const startDate=new Date("2026-01-01T00:00:00Z");
+
+function updateTimer(){
+  const now=new Date();
+  const diff=now-startDate;
+
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff/(1000*60*60))%24);
+  const m=Math.floor((diff/(1000*60))%60);
+  const s=Math.floor((diff/1000)%60);
+
+  document.getElementById("timer").textContent=
+    `Established: ${d}d ${h}h ${m}m ${s}s`;
+}
+
+setInterval(updateTimer,1000);
+updateTimer();
+
 </script>
 
 </body>
